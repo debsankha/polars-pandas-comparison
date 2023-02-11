@@ -34,12 +34,18 @@ df
 // :dep chrono
 
 use chrono::NaiveDate;
+use std::time::{Duration, Instant};
 
 // %% tags=[]
 let t_start: NaiveDate = NaiveDate::from_ymd_opt(2020, 4, 1).unwrap();
 let t_end: NaiveDate = NaiveDate::from_ymd_opt(2020, 4, 30).unwrap();
 
 // %% tags=[]
-df.clone().lazy().filter(col("timestamp").gt(lit(t_start))).collect()?.lazy().filter(col("timestamp").lt(lit(t_end))).collect()?
+let start = Instant::now();
+let out = df.clone().lazy().filter((col("timestamp").gt(lit(t_start))).and(col("timestamp").lt(lit(t_end)))).sum().collect()?;
+let duration = start.elapsed();
+
+// %% tags=[]
+duration
 
 // %%

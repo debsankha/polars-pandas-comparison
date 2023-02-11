@@ -34,6 +34,6 @@ df_indexed = df.set_index('timestamp').sort_index()
 # %timeit df.loc['2020-04-01':'2020-04-30']
 
 # %% tags=[]
-# %timeit df_indexed.loc['2020-04-01':'2020-04-30']
+df_indexed.loc['2020-04-01':'2020-04-30'].sum()
 
 # %%

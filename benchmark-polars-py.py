@@ -20,11 +20,11 @@ from datetime import datetime, timedelta
 
 # %%
 df = pl.read_parquet("fake_vehicle_data.pq")
-df
+df.head()
 
 # %% tags=[]
 df.filter(
     pl.col("timestamp").is_between(datetime(2020, 4, 1), datetime(2020, 4, 30)),
-)
+).sum()
 
 # %%

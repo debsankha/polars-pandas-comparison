@@ -27,3 +27,5 @@ vehicles = np.random.randint(0, 10, N)
 x = np.random.uniform(0, 1, N)
 
 pd.DataFrame(dict(timestamp=times, vehicles=vehicles, x=x)).to_parquet("fake_vehicle_data.pq", allow_truncated_timestamps=True, coerce_timestamps='ms')
+
+# %%
