@@ -14,11 +14,6 @@
 // ---
 
 // %% tags=[]
-println!("Hello world");
-eprintln!("Hello error");
-format!("Hello {}", "world")
-
-// %% tags=[]
 // :dep polars = { version = "0.24.3", features = ["lazy", "parquet", "csv-file", "strings", "temporal", "dtype-duration", "dtype-categorical", "concat_str", "list", "list_eval", "rank", "lazy_regex"]}
 // :dep color-eyre = {version = "0.6.2"}
 // :dep rand = {version = "0.8.5"}

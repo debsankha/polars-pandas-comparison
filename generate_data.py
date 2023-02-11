@@ -13,9 +13,6 @@
 #     name: python3
 # ---
 
-# %%
-# !pwd
-
 # %% tags=[]
 import pandas as pd
 import numpy as np
@@ -30,25 +27,3 @@ vehicles = np.random.randint(0, 10, N)
 x = np.random.uniform(0, 1, N)
 
 pd.DataFrame(dict(timestamp=times, vehicles=vehicles, x=x)).to_parquet("fake_vehicle_data.pq", allow_truncated_timestamps=True, coerce_timestamps='ms')
-
-# %% [markdown]
-# ## Some benchmarks
-#
-# * Selecting data in sorted df
-# * normal join
-# * asof_join 
-
-# %% tags=[]
-df = pd.read_parquet("fake_vehicle_data.pq")
-df
-
-# %% tags=[]
-df_indexed = df.set_index('timestamp').sort_index()
-
-# %% tags=[]
-# %timeit df.loc['2020-04-01':'2020-04-30']
-
-# %% tags=[]
-# %timeit df_indexed.loc['2020-04-01':'2020-04-30']
-
-# %%
