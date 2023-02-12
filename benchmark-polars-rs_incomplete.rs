@@ -13,6 +13,12 @@
 //     name: rust
 // ---
 
+// %% [markdown]
+// # Some benchmarks
+
+// %% [markdown]
+// ## Read the data
+
 // %% tags=[]
 // :dep polars = { version = "0.24.3", features = ["lazy", "parquet", "csv-file", "strings", "temporal", "dtype-duration", "dtype-categorical", "concat_str", "list", "list_eval", "rank", "lazy_regex"]}
 // :dep color-eyre = {version = "0.6.2"}
@@ -40,15 +46,34 @@ use std::time::{Duration, Instant};
 let t_start: NaiveDate = NaiveDate::from_ymd_opt(2020, 4, 1).unwrap();
 let t_end: NaiveDate = NaiveDate::from_ymd_opt(2020, 4, 30).unwrap();
 
+// %% [markdown]
+// ## Selecting data
+
+// %% [markdown] tags=[]
+// ### In unsorted df
+
 // %% tags=[]
+let df2 = df.clone();
+
 let start = Instant::now();
-let out = df.clone().lazy().filter((col("timestamp").gt(lit(t_start))).and(col("timestamp").lt(lit(t_end)))).sum().collect()?;
+let out = df2.lazy().filter((col("timestamp").gt(lit(t_start))).and(col("timestamp").lt(lit(t_end)))).sum().collect()?;
 let duration = start.elapsed();
+println!("{}", (duration.as_micros() as f64)/1000000.0);
+out
 
 // %% tags=[]
-duration
+let df2 = df.clone();
+
+let start = Instant::now();
+let out = df2.lazy().filter((col("timestamp").gt(lit(t_start))).and(col("timestamp").lt(lit(t_end)))).sum().collect()?;
+let duration = start.elapsed();
+println!("{}", (duration.as_micros() as f64)/1000000.0);
+out
+
+// %% [markdown]
+// ### In sorted df
 
 // %%
-414/28
 
-// %%
+// %% [markdown]
+// # asof join
