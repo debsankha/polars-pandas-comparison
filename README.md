@@ -6,12 +6,11 @@ pip install polars pandas jupyterlab
 ```
 
 ## Running the benchmarks
-
-We are using `jupytext` for checking in notebooks to git.
-
-1. Generate data: `generate_data.py`
-2. Run pandas benchmarks: `benchmark-pandas.py`
-2. Run polars benchmarks: `benchmark-polars-py.py`
+Run the notebook `benchmark.py`
+*Note:* We are using `jupytext` for checking in notebooks to git. 
 
 There's a rust notebook, running polars benchmarks using its native rust api,
 but it's not complete: `benchmark-polars-rs.rs`
+
+## Benchmark results
+See [benchmark_results.md](./benchmark_results.md)
